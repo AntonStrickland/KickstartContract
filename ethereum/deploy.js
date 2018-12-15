@@ -1,4 +1,4 @@
-import secret from './secret.js';
+const secret = require('./secret.js');
 
 const HDWalletProvider = require('truffle-hdwallet-provider');
 const Web3 = require('web3');

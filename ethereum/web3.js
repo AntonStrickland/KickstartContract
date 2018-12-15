@@ -1,5 +1,5 @@
 import Web3 from 'web3';
-import secret from './secret.js';
+const secret = require('./secret.js');
 
 let web3;
 

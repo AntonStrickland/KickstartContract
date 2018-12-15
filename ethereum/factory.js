@@ -1,5 +1,5 @@
 import web3 from "./web3.js";
-import secret from './secret.js';
+const secret = require('./secret.js');
 
 import CampaignFactory from './build/CampaignFactory.json';
 
