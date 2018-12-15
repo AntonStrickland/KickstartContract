@@ -45,11 +45,17 @@ contract Campaign {
 
     function contribute() public payable {
 
+        // Contributors cannot contribute more than once from the same address
+        //require(!approvers[msg.sender]);
+
         // All contributors must send at least the minimum amount
         require(msg.value >= minimumContribution);
 
+        // If this is a new approver, increment the count
+        if (!approvers[msg.sender])
+          approversCount++;
+
         approvers[msg.sender] = true;
-        approversCount++;
     }
 
     function createRequest(string description, uint value, address recipient) public onlyManager {
@@ -89,6 +95,9 @@ contract Campaign {
 
         // Require that this request is not already complete
         require(!request.complete);
+
+        // Require that the campaign actually has enough money to send
+        require(address(this).balance >= request.value);
 
         // Send the money to the receipient and mark request as complete
         request.recipient.transfer(request.value);
